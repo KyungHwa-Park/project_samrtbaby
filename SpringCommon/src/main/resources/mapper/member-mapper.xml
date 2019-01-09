@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.iot.common.dao.MemberDao">
+
+	<!-- Create -->
+	<insert id="insert" parameterType="Member"><![CDATA[
+		insert into member (
+			user_id, password, par_name, baby_name, email
+		) 
+		values(
+			#{userId}, #{password} , #{parName}, #{babyName}, #{email}
+		)
+	]]></insert>
+
+
+	<!-- Read -->
+	<select id="count" resultType="int"><![CDATA[
+		select count(*) from member		
+	]]></select>
+	
+	<select id="getList" resultType="Member"><![CDATA[
+		select * from member
+	]]></select>
+
+	<select id="findById" parameterType="string" 
+				resultType="Member"><![CDATA[
+		select * from member where user_id = #{userId}
+	]]></select>
+	
+	
+	<!-- Update -->   
+	<!--
+	<update id="update" parameterType="Member"><![CDATA[
+		update member set  
+		where user_id=#{userId} and password=#{password}
+	]]></update> 
+	
+	<update id="changePassword" parameterType="map"><![CDATA[
+		update member set 
+			password=#{newPassword}
+		where user_id=#{userId} and password=#{oldPassword}
+	]]></update>
+	-->
+	
+	
+	<!-- Delete -->
+	<delete id="delete" parameterType="String"><![CDATA[
+		delete from member
+		where user_id = #{userId}
+	]]>
+	</delete>
+	
+</mapper>
+

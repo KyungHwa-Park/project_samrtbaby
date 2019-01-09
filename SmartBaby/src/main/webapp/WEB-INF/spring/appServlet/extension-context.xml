@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles/tiles-layout.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />
+	</bean>
+
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- -->
+
+
+
+<!-- <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+	<property name="host" value="smtp.gmail.com" /> <property name="port" 
+	value="587" /> <property name="defaultEncoding" value="utf-8" /> <property 
+	name="username" value="aaaaaa@gmail.com" /> <property name="password" 
+	value="aaaaaa" /> <property name="javaMailProperties"> <props> 
+	<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop> <prop 
+	key="mail.smtp.starttls.enable">true</prop> <prop key="mail.smtp.auth">true</prop> 
+	<prop key="mail.debug">true</prop> </props> </property> 
+	</bean> -->
+
+<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"> 
+	<property name="basename" value="classpath:message/messages" /> </bean> -->		
+		
+		
