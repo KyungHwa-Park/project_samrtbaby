@@ -62,6 +62,7 @@ public class AccountController {
 		}		
 		service.join(member);		
 		return "redirect:/";
+//		return "account/join_success";
 	}	
 	
 	// id 중복 체크
