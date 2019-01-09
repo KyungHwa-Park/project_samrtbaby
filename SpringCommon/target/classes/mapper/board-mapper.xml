@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.iot.common.dao.BoardDao">
+	
+	<select id="count" resultType="int">
+		select count(*)
+		from board
+	</select>
+	
+	<!-- 목록용으로  content 칼럼은 제외 -->
+	<select id="getPage" parameterType="map"
+						resultType="Board">
+		select board_id, title, writer, read_cnt, reg_date
+		from (
+			select row_number() over (order by reg_date desc) as seq,
+					board_id, title, writer, read_cnt, reg_date
+			from board		
+		)
+		where seq between #{start} and #{end}
+		order by board_id desc					
+	</select>
+	
+	<insert id="insert" parameterType="Board"
+			keyColumn = "board_id" keyProperty="boardId">
+		insert into board
+		(board_id, title, writer, password, read_cnt, content,
+			reg_date, update_date)
+		values (board_seq.nextval, #{title}, #{writer}, #{password}, 0,
+			#{content}, sysdate, sysdate)
+	</insert>
+	
+	<!-- 게시글 조회수 증가 : 게시글 보기 할 때마다 호출 -->
+	<update id="increaseReadCnt" parameterType="long">
+		update board set
+			read_cnt = read_cnt + 1
+		where board_id = #{boardId}
+	</update>
+	
+	<select id="findById" parameterType="long" resultType="Board">
+		select * from board
+		where board_id = #{boardId}
+	</select>
+	
+	<!-- 게시글 수정, 비밀번호를 아는 경우에만 수정 가능하도록 쿼리 작성 -->
+	<update id="update" parameterType="Board">
+		update board set
+			title = #{title},
+			content = #{content},
+			update_date = sysdate
+		where board_id=#{boardId} and password=#{password}
+	</update>
+	
+	<!-- 게시글 삭제, 비밀번호를 아는 경우에 수정 가능 -->
+	<delete id="delete" parameterType="Board">
+		delete from board
+		where board_id = #{boardId}
+	</delete>
+
+
+</mapper>
