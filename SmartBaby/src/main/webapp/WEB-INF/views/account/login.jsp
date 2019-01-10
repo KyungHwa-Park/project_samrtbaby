@@ -4,7 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
    
 <div class="row" >
-
 	<div class="col-md-6 offset-md-3">
 		<h1 class="my-5">로그인</h1>  
 		<form:form commandName="member">

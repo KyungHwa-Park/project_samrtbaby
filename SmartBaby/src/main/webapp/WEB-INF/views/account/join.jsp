@@ -81,17 +81,17 @@ $(function() {
 			</div>
 			
 			<div class="md-form">
-				<label for="parName">사용자 이름 </label>
+				<label for="parName">이름 </label>
 				<form:input  path="parName" class="form-control"/>
 				<form:errors path="parName" element="div" cssClass="error" />	
 			</div>
 			
 			<div class="md-form">
-				<label for="babyName">아기 이름 </label>
+				<label for="babyName">이름 </label>
 				<form:input  path="babyName" class="form-control"/>
 				<form:errors path="babyName" element="div" cssClass="error" />	
 			</div>
-		
+			
 			<div class="md-form">
 				<label for="email">email </label>
 				<form:input  path="email" class="form-control"/>
@@ -107,7 +107,8 @@ $(function() {
 					<i class="fas fa-undo"></i> 취소
 				</button>
 			</p>	
-
+		
+		
 		</form:form>
 	</div>
 </div>

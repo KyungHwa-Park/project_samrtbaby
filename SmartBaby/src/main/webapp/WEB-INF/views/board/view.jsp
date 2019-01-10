@@ -7,7 +7,6 @@
 <%@ taglib tagdir="/WEB-INF/tags/util" prefix="iot"%>
 
 <script>
-
 $(function(){
 	$('#delete-btn').click(function(e){
 		e.preventDefault();

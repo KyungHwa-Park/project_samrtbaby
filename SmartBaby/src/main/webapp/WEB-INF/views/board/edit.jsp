@@ -6,7 +6,6 @@
 
 <%@ taglib tagdir="/WEB-INF/tags/util" prefix="iot"%>
 
-
 <script src="${context}/resources/bower_components/tinymce/tinymce.min.js">
 </script>
 

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -7,40 +7,60 @@
 
 <%@ taglib tagdir="/WEB-INF/tags/util" prefix="iot"%>
 
-<iot:page-header icon="list" title="게시글 목록"/>
+<script>
+	$(function() {
+		$('.delete-btn').click(function(e) {
+			e.preventDefault();
+			var result = confirm('${board.boardId} 기록을 삭제할까요?');
+			if (result) {
+				location = $(this).attr('href');
+			}
+		})
+	});
 
-<div class="text-right">
-	(총 ${pagination.total}건)	/
-	<a href="create"><i class="fas fa-plus"></i>추가</a>)
-</div>
+	//popovers Initialization
+	$(function() {
+		$('[data-toggle="popover"]').popover()
+	})
+</script>
 
-<table class="table table-stripped">
-	<thead>
-		<tr>
-			<th style="width:60px">No</th>
-			<th>제목</th>
-			<th style="width:100px">작성자</th>
-			<th style="widthwidth:90px">조회수</th>
-			<th style="width:120px">등록일</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="board" items="${list}" varStatus="status">
-			<fmt:formatDate var = "regDate" value="${board.regDate}"
-					pattern="yyyy-MM-dd" scope="request" />
+<iot:page-header icon="list" title="수면 기록" />
+
+<div class="col-md-10">
+	<div class="text-right">(총 ${pagination.total}건)</div>
+
+	<table class="table table-stripped">
+		<thead>
 			<tr>
-				<td>${board.boardId}</td>
-				<td>
-					<a href="view/${board.boardId}?page=${pagination.page}">
-						${board.title} <iot:new-item date="${regDate}"/>
-					</a>
-				</td>
-				<td>${board.writer}</td>
-				<td>${board.readCnt}</td>
-				<td>${regDate}</td>
+				<th style="width: 60px">No</th>
+				<th style="width: 120px">등록일</th>
+				<th style="width: 120px">잠든 시각</th>
+				<th style="width: 120px">일어난 시각</th>
+				<th style="width: 120px">수면 시간</th>
+				<th style="width: 120px">수면 타입</th>
+				<th style="width: 120px">memo</th>
 			</tr>
-		</c:forEach>
-	</tbody>
-</table>
-
-<iot:pagination/>
+		</thead>
+		<tbody>
+			<c:forEach var="board" items="${list}" varStatus="status">
+				<fmt:formatDate var="regDate" value="${board.regDate}"
+					pattern="yyyy-MM-dd" scope="request" />
+				<tr>
+					<td>${board.boardId}</td>
+					<td>${regDate}</td>
+					<td>${board.sleepTime}</td>
+					<td>${board.wakeupTime}</td>
+					<td>${board.totalTime}</td>
+					<td>${board.dayNight}</td>
+					<td><c:if test="${board.memo != null}">
+							<button type="button" class="btn btn-primary"
+								data-toggle="popover" data-placement="right" title="memo"
+								data-content="${board.memo}">memo</button>
+						</c:if></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+</div>
+<div class="col-md-2"></div>
+<iot:pagination />
