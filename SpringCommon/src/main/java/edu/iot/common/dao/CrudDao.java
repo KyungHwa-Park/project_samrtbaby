@@ -15,7 +15,7 @@ public interface CrudDao<M, K>{
 	List<M> getList() throws Exception;
 	
 //	Update (DML : UPDATE)
-//	int update(M m) throws Exception;
+	int update(M m) throws Exception;
 	
 //	Delete (DML : DELETE)
 	int delete(K k) throws Exception;

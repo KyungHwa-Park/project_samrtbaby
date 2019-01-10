@@ -9,8 +9,9 @@ import lombok.Data;
 @Data
 public class Board {
 	
+	
 	@NotEmpty
-	private long id;
+	private long boardId;
 	
 	private Date regDate;
 	
@@ -20,7 +21,7 @@ public class Board {
 	
 	private Date totalTime;
 	
-	private DayType dayNight;
+	private SleepType dayNight;
 	
 	private String	memo;
 	

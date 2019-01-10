@@ -6,7 +6,8 @@ import java.util.Map;
 import edu.iot.common.model.Board;
 
 public interface BoardDao extends CrudDao<Board, Long> {
-	void delete (Board board) throws Exception;
-	int update(Board board) throws Exception;
+	
 	List<Board> getPage(Map map) throws Exception;
+	int updateWTime(Board board) throws Exception;		// wakeupTime값 업데이트용
+	int updateTTime(Board board) throws Exception;		// totalTime값 계산용
 }

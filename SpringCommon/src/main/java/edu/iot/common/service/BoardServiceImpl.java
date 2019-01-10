@@ -54,7 +54,7 @@ public class BoardServiceImpl implements BoardService {
 //			throw new PasswordMissmatchException();
 //		}
 //		attachmentDao.deleteByBoardId(board.getBoardId());
-		dao.delete(board.getId());
+		dao.delete(board.getBoardId());
 	}
 
 	@Override

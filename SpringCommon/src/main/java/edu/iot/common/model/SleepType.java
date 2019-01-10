@@ -1,6 +1,6 @@
 package edu.iot.common.model;
 
-public enum DayType {
+public enum SleepType {
 	DAY,
 	NIGHT
 }
