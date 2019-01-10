@@ -34,10 +34,10 @@
 	<!-- 목록용으로  memo 칼럼은 제외 -->
 	<select id="getPage1" parameterType="map"
 						resultType="Board">
-		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night
+		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo
 		from (
 			select row_number() over (order by reg_date desc) as seq,
-					board_id, reg_date, sleep_time, wakeup_time, total_time, day_night
+					board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo
 			from board		
 		)
 		where seq between #{start} and #{end}
@@ -46,10 +46,10 @@
 	
 		<!-- 목록용으로  memo 칼럼은 제외 -->
 	<select id="getPage2" resultType="Board">
-		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night
+		select user_id, board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo
 		from (
 			select row_number() over (order by reg_date desc) as seq,
-					board_id, reg_date, sleep_time, wakeup_time, total_time, day_night
+					user_id, board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo
 			from board		
 		)
 		where seq between 1 and 20
@@ -60,7 +60,7 @@
 	<select id="getLastBoard" parameterType="String" resultType="Board">
 		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night
 		from (
-			select row_number() over (order by reg_date desc) as seq,
+			select row_number() over (order by board_id desc) as seq,
 					board_id, user_id, reg_date, sleep_time, wakeup_time, total_time, day_night
 			from board
 			where user_id = #{userId}

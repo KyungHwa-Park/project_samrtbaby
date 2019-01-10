@@ -1,6 +1,7 @@
 package edu.iot.app.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -66,17 +67,17 @@ public class BoardController {
 		String flag = httpServletRequest.getParameter("flag");
 
 		Date date = new Date();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yy/MM/dd");
 		SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
 		
 		String result = "";
 		Date time = new Date();
-		Date regDate = sdf2.parse(sdf2.format(time));
-		Date nowTime = sdf1.parse(sdf1.format(time));
-		int hour = Integer.parseInt(sdf3.format(time));
+		Date regDate = time;
+		String nowTime = sdf1.format(time);
+		int nowHour = Integer.parseInt(sdf3.format(time));
 		SleepType dayNight;
-		if(hour < 20 && hour > 9) {
+		if(nowHour < 20 && nowHour > 9) {
 			dayNight = SleepType.DAY;
 		}else {
 			dayNight = SleepType.NIGHT;
@@ -102,25 +103,33 @@ public class BoardController {
 				throw new Exception();
 			}
 			board.setWakeupTime(nowTime);
-			Date sleepTime = board.getSleepTime();
+			String sleepTime = board.getSleepTime();
 			
-			long diff = nowTime.getTime() - sleepTime.getTime();
+			long diff = sdf1.parse(nowTime).getTime() - sdf1.parse(sleepTime).getTime();
+			long sec = diff/1000;
+			long hour = sec/3600;
+			sec = sec%3600;
+			long min = sec/60;
+			sec = sec % 60;
 			
-			Date totalTime = sdf1.parse(sdf1.format(new Date(diff)));
+			String totalTime = hour+"시간 "+min+"분 "+sec+"초";
 			board.setTotalTime(totalTime);
 			
 			service.updateWakeup(board);
 			System.out.println(board);
-			result = "아기의 기상 시간 : " + nowTime;
+			result = "아기의 수면 시간 : " + totalTime;
 		}
 		return result;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/android/list")
 	public @ResponseBody String androidList(HttpServletRequest httpServletRequest) throws Exception {
-		List<Board> array = service.getPage2();
+		ArrayList<Board> array = service.getPage2();
+		System.out.println(array);
+		
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonString = mapper.writeValueAsString(array);
+		System.out.println(jsonString);
 		return jsonString;
 	}
 	

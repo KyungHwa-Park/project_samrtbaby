@@ -21,11 +21,11 @@ public class Board {
 	
 	private Date regDate;
 	
-	private Date sleepTime;
+	private String sleepTime;
 	
-	private Date wakeupTime;
+	private String wakeupTime;
 	
-	private Date totalTime;
+	private String totalTime;
 	
 	private SleepType dayNight;
 	

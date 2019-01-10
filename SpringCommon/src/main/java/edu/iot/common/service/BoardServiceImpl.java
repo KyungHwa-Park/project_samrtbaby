@@ -29,10 +29,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> getPage2() throws Exception {
-		List<Board> array = new ArrayList<Board>();
-
-		return array;
+	public ArrayList<Board> getPage2() throws Exception {
+		List<Board> array = dao.getPage2();
+		ArrayList<Board> result = new ArrayList<>();
+		for(Board board : array) {
+			if(board != null) {
+				result.add(board);
+			}
+		}
+		return result;
 	}
 
 	@Override
