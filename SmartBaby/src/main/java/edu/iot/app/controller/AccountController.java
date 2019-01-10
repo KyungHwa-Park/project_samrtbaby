@@ -104,9 +104,9 @@ public class AccountController {
 		String email = httpServletRequest.getParameter("email");
 		Date regDate, updateDate;
 
-		regDate = sdf1.parse(sdf1.format(new Date(System.currentTimeMillis())));
+		regDate = sdf1.parse(sdf1.format(new Date()));
 
-		updateDate = sdf1.parse(sdf1.format(new Date(System.currentTimeMillis())));
+		updateDate = sdf1.parse(sdf1.format(new Date()));
 
 		Member member = new Member(userId, password, parName, babyName, email, regDate, updateDate);
 		if (member != null) {

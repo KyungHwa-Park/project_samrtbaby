@@ -9,10 +9,10 @@
 	<insert id="insert" parameterType="Board"
 			keyColumn = "board_id" keyProperty="boardId">
 		insert into board(
-			board_id, reg_date, sleep_time, 
-			day_night, memo, update_date)
-		values (board_seq.nextval, sysdate, sysdate,
-			 #{dayNight}, #{memo}, sysdate)
+			board_id, user_id, reg_date, sleep_time, 
+			day_night, update_date)
+		values (board_seq.nextval, #{userId}, #{regDate}, #{sleepTime},
+			 #{dayNight}, sysdate)
 	</insert>
 	
 	
@@ -32,7 +32,7 @@
 	]]></select>
 	
 	<!-- 목록용으로  memo 칼럼은 제외 -->
-	<select id="getPage" parameterType="map"
+	<select id="getPage1" parameterType="map"
 						resultType="Board">
 		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night
 		from (
@@ -44,6 +44,30 @@
 		order by board_id desc					
 	</select>
 	
+		<!-- 목록용으로  memo 칼럼은 제외 -->
+	<select id="getPage2" resultType="Board">
+		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night
+		from (
+			select row_number() over (order by reg_date desc) as seq,
+					board_id, reg_date, sleep_time, wakeup_time, total_time, day_night
+			from board		
+		)
+		where seq between 1 and 20
+		order by board_id desc					
+	</select>
+	
+	<!-- 가장 최근 목록 가져오기 -->
+	<select id="getLastBoard" parameterType="String" resultType="Board">
+		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night
+		from (
+			select row_number() over (order by reg_date desc) as seq,
+					board_id, user_id, reg_date, sleep_time, wakeup_time, total_time, day_night
+			from board
+			where user_id = #{userId}
+		)
+		where seq = 1
+	</select>
+	
 	
 	<!-- Update -->
 	<!-- 메모 추가용 -->
@@ -53,17 +77,14 @@
 		where board_id=#{boardId}
 	</update>
 	
-	<update id="updateWTime" parameterType="Date">
-		update board 
-		set wakeup_time = #{wakeupTime}
+		<!--기상 시간 추가용 -->
+	<update id="updateWakeup" parameterType="Board">
+		update board set 
+			wakeup_time = #{wakeupTime},
+			total_time = #{totalTime}
 		where board_id=#{boardId}
 	</update>
 	
-	<update id="updateTTime" parameterType="Date">
-		update board 
-		set total_time = #{totalTime}
-		where board_id=#{boardId}
-	</update>
 	
 	<!-- Delete -->
 	<!-- 게시글 삭제, 비밀번호를 아는 경우에 수정 가능 -->
