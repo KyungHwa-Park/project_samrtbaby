@@ -39,7 +39,7 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="${context}/account/join">
-						<i class="fas fa-user-plus"></i>
+						<i class="fas fa-user-circle"></i>
 						회원가입</a>
 				</li>
 			</c:if> 

@@ -54,8 +54,9 @@ $(function() {
 });
 </script>
 <div class="row" >
-	<div class="col-md-8 offset-md-2">	
-		<h1 class="my-5"><i class="fas fa-user-plus"></i> 회원가입</h1> 
+	<div class="col-md-6 offset-md-3">	
+		<h2 class="my-5" align="center">
+			<i class="fas fa-user-circle fa-lg"></i>   회원가입</h2> 
 		<form:form commandName="member">
 			<div class="md-form">
 				<label for="userId">사용자 ID </label>
@@ -81,13 +82,13 @@ $(function() {
 			</div>
 			
 			<div class="md-form">
-				<label for="parName">이름 </label>
+				<label for="parName">사용자 이름 </label>
 				<form:input  path="parName" class="form-control"/>
 				<form:errors path="parName" element="div" cssClass="error" />	
 			</div>
 			
 			<div class="md-form">
-				<label for="babyName">이름 </label>
+				<label for="babyName">아기 이름 </label>
 				<form:input  path="babyName" class="form-control"/>
 				<form:errors path="babyName" element="div" cssClass="error" />	
 			</div>
@@ -98,7 +99,7 @@ $(function() {
 				<form:errors path="email" element="div" cssClass="error" />	
 			</div>
 		
-			<p>
+			<p align="center">
 				<button type="submit" class="btn btn-primary" 
 						disabled>
 					<i class="fas fa-check"></i> 확인
