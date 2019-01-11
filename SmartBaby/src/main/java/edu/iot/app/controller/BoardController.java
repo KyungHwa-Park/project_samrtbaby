@@ -126,8 +126,26 @@ public class BoardController {
 			sec = sec % 3600;
 			long min = sec / 60;
 			sec = sec % 60;
-
-			String totalTime = hour + ":" + min + ":" + sec;
+			
+			String hourStr, minStr, secStr;
+			if(hour < 10) {
+				hourStr = "0"+Long.toString(hour);
+			}else {
+				hourStr = Long.toString(hour);
+			}
+			
+			if(min < 10) {
+				minStr = "0"+Long.toString(min);
+			}else {
+				minStr = Long.toString(min);
+			}
+			
+			if(sec < 10) {
+				secStr = "0"+Long.toString(sec);
+			}else {
+				secStr = Long.toString(sec);
+			}
+			String totalTime = hourStr + ":" + minStr + ":" + secStr;
 			board.setTotalTime(totalTime);
 
 			service.updateWakeup(board);
