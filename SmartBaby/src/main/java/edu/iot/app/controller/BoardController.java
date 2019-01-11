@@ -70,11 +70,13 @@ public class BoardController {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yy/MM/dd");
 		SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
+		SimpleDateFormat sdf4 = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 		
 		String result = "";
 		Date time = new Date();
-		Date regDate = time;
+		Date regDate = sdf4.parse(sdf4.format(time));
 		String nowTime = sdf1.format(time);
+		String regDateStr = sdf2.format(time);
 		int nowHour = Integer.parseInt(sdf3.format(time));
 		SleepType dayNight;
 		if(nowHour < 20 && nowHour > 9) {
@@ -88,8 +90,10 @@ public class BoardController {
 			Board board = new Board();
 			board.setUserId(userId);
 			board.setRegDate(regDate);
+			board.setRegDateStr(regDateStr);
 			board.setSleepTime(nowTime);
 			board.setDayNight(dayNight);
+			board.setUpdateDate(regDate);
 			
 			service.create(board);
 			System.out.println(board);
@@ -103,6 +107,7 @@ public class BoardController {
 				throw new Exception();
 			}
 			board.setWakeupTime(nowTime);
+			board.setUpdateDate(regDate);
 			String sleepTime = board.getSleepTime();
 			
 			long diff = sdf1.parse(nowTime).getTime() - sdf1.parse(sleepTime).getTime();
@@ -112,7 +117,7 @@ public class BoardController {
 			long min = sec/60;
 			sec = sec % 60;
 			
-			String totalTime = hour+"시간 "+min+"분 "+sec+"초";
+			String totalTime = hour+":"+min+":"+sec;
 			board.setTotalTime(totalTime);
 			
 			service.updateWakeup(board);

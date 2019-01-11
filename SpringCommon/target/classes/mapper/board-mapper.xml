@@ -9,9 +9,9 @@
 	<insert id="insert" parameterType="Board"
 			keyColumn = "board_id" keyProperty="boardId">
 		insert into board(
-			board_id, user_id, reg_date, sleep_time, 
+			board_id, user_id, reg_date, reg_date_str, sleep_time, 
 			day_night, update_date)
-		values (board_seq.nextval, #{userId}, #{regDate}, #{sleepTime},
+		values (board_seq.nextval, #{userId}, #{regDate}, #{regDateStr}, #{sleepTime},
 			 #{dayNight}, sysdate)
 	</insert>
 	
@@ -34,10 +34,10 @@
 	<!-- 목록용으로  memo 칼럼은 제외 -->
 	<select id="getPage1" parameterType="map"
 						resultType="Board">
-		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo
+		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo, update_date
 		from (
 			select row_number() over (order by reg_date desc) as seq,
-					board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo
+					board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo, update_date
 			from board		
 		)
 		where seq between #{start} and #{end}
@@ -46,10 +46,10 @@
 	
 		<!-- 목록용으로  memo 칼럼은 제외 -->
 	<select id="getPage2" resultType="Board">
-		select user_id, board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo
+		select user_id, board_id, reg_date, reg_date_str, sleep_time, wakeup_time, total_time, day_night, memo, update_date
 		from (
 			select row_number() over (order by reg_date desc) as seq,
-					user_id, board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo
+					user_id, board_id, reg_date, reg_date_str, sleep_time, wakeup_time, total_time, day_night, memo, update_date
 			from board		
 		)
 		where seq between 1 and 20
@@ -58,10 +58,10 @@
 	
 	<!-- 가장 최근 목록 가져오기 -->
 	<select id="getLastBoard" parameterType="String" resultType="Board">
-		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night
+		select board_id, reg_date, reg_date_str, sleep_time, wakeup_time, total_time, day_night, update_date
 		from (
 			select row_number() over (order by board_id desc) as seq,
-					board_id, user_id, reg_date, sleep_time, wakeup_time, total_time, day_night
+					board_id, user_id, reg_date, reg_date_str, sleep_time, wakeup_time, total_time, day_night, update_date
 			from board
 			where user_id = #{userId}
 		)
@@ -73,7 +73,8 @@
 	<!-- 메모 추가용 -->
 	<update id="update" parameterType="Board">
 		update board 
-		set memo = #{memo}
+		set memo = #{memo},
+		update_time = #{updateTime};
 		where board_id=#{boardId}
 	</update>
 	
@@ -81,7 +82,8 @@
 	<update id="updateWakeup" parameterType="Board">
 		update board set 
 			wakeup_time = #{wakeupTime},
-			total_time = #{totalTime}
+			total_time = #{totalTime},
+			update_date = #{updateDate}
 		where board_id=#{boardId}
 	</update>
 	

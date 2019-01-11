@@ -21,6 +21,8 @@ public class Board {
 	
 	private Date regDate;
 	
+	private String regDateStr;
+	
 	private String sleepTime;
 	
 	private String wakeupTime;
