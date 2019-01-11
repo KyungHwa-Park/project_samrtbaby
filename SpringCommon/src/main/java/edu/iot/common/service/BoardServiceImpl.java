@@ -21,7 +21,7 @@ public class BoardServiceImpl implements BoardService {
 	public Map<String, Object> getPage1(int page, String userId) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		Map<String, Object> map2 = new HashMap<>();
-		
+
 		int total = dao.count(userId);
 		Pagination pagination = new Pagination(page, total);
 		map.put("pagination", pagination);
@@ -35,8 +35,8 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Board> getPage2(String userId) throws Exception {
 		List<Board> array = dao.getPage2(userId);
 		ArrayList<Board> result = new ArrayList<>();
-		for(Board board : array) {
-			if(board != null) {
+		for (Board board : array) {
+			if (board != null) {
 				result.add(board);
 			}
 		}
@@ -69,16 +69,21 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
-	@Override
-	// 일반 사용자에 의한 삭제
-	public void delete(Board board) throws Exception {
+//	@Override
+//	// 일반 사용자에 의한 삭제
+//	public void delete(Board board) throws Exception {
+//
+////		Board b = dao.findById(board.getId());
+////		if(!b.getPassword().equals(board.getPassword())) {
+////			throw new PasswordMissmatchException();
+////		}
+////		attachmentDao.deleteByBoardId(board.getBoardId());
+//		dao.delete(board.getBoardId());
+//	}
 
-//		Board b = dao.findById(board.getId());
-//		if(!b.getPassword().equals(board.getPassword())) {
-//			throw new PasswordMissmatchException();
-//		}
-//		attachmentDao.deleteByBoardId(board.getBoardId());
-		dao.delete(board.getBoardId());
+	@Override
+	public boolean delete(long boardId) throws Exception {
+		return dao.delete(boardId) == 1;
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public interface BoardService {
 	public Board getLastBoard(String userId) throws Exception;
 	public void updateMemo(Board board) throws Exception;
 	public void updateWakeup(Board board) throws Exception;
-	public void delete(Board board) throws Exception;
 	
+	public boolean delete(long boardId) throws Exception;
 	
 }

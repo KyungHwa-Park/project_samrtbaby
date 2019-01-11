@@ -40,17 +40,18 @@ public class BoardController {
 	ServletContext context;
 
 	@RequestMapping("/list")
-	public void list(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpSession session) throws Exception {
+	public void list(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpSession session)
+			throws Exception {
 
 //		model.addAttribute("today", Util.getToday());
 		try {
-			Member member = (Member)session.getAttribute("USER");
-			if(member != null) {
+			Member member = (Member) session.getAttribute("USER");
+			if (member != null) {
 				String userId = member.getUserId();
 				System.out.println("userId : " + userId);
-				model.addAllAttributes(service.getPage1(page, userId));			
-			}			
-		}catch(Exception e) {
+				model.addAllAttributes(service.getPage1(page, userId));
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -126,23 +127,23 @@ public class BoardController {
 			sec = sec % 3600;
 			long min = sec / 60;
 			sec = sec % 60;
-			
+
 			String hourStr, minStr, secStr;
-			if(hour < 10) {
-				hourStr = "0"+Long.toString(hour);
-			}else {
+			if (hour < 10) {
+				hourStr = "0" + Long.toString(hour);
+			} else {
 				hourStr = Long.toString(hour);
 			}
-			
-			if(min < 10) {
-				minStr = "0"+Long.toString(min);
-			}else {
+
+			if (min < 10) {
+				minStr = "0" + Long.toString(min);
+			} else {
 				minStr = Long.toString(min);
 			}
-			
-			if(sec < 10) {
-				secStr = "0"+Long.toString(sec);
-			}else {
+
+			if (sec < 10) {
+				secStr = "0" + Long.toString(sec);
+			} else {
 				secStr = Long.toString(sec);
 			}
 			String totalTime = hourStr + ":" + minStr + ":" + secStr;
@@ -158,7 +159,7 @@ public class BoardController {
 	@RequestMapping(method = RequestMethod.POST, value = "/android/list")
 	public @ResponseBody String androidList(HttpServletRequest httpServletRequest) throws Exception {
 		String userId = httpServletRequest.getParameter("userId");
-		
+
 		ArrayList<Board> array = service.getPage2(userId);
 		System.out.println(array);
 
@@ -189,18 +190,18 @@ public class BoardController {
 	public @ResponseBody String androidEditMemo(HttpServletRequest httpServletRequest) throws Exception {
 		Long boardId = Long.parseLong(httpServletRequest.getParameter("boardId"));
 		String memo = httpServletRequest.getParameter("memo");
-		
+
 		System.out.println(boardId + " : " + memo);
 		if (memo != null) {
 			Board board = service.findById(boardId);
-			
+
 			System.out.println(board);
-			
+
 			board.setMemo(memo);
 //			board.setUpdateDate(new Date());
-			
+
 			service.updateMemo(board);
-			
+
 			System.out.println("memo update 완료");
 			return "ok";
 		} else {
@@ -233,13 +234,10 @@ public class BoardController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/delete", method = RequestMethod.GET, produces = "text/plain; charset=utf8")
-	public String delete(Board board) {
-		try {
-			service.delete(board);
-			return "ok";
-		} catch (Exception e) {
-			return e.getMessage();
-		}
+	@RequestMapping(value = "/delete/{boardId}", method = RequestMethod.GET)
+	public String delete(@PathVariable long boardId) throws Exception {
+		service.delete(boardId);
+		return "redirect:/board/list";
 	}
+
 }
