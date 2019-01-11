@@ -3,10 +3,10 @@ package edu.iot.app.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.iot.common.exception.PasswordMissmatchException;
 import edu.iot.common.model.Board;
+import edu.iot.common.model.Member;
 import edu.iot.common.model.SleepType;
 import edu.iot.common.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,10 +40,19 @@ public class BoardController {
 	ServletContext context;
 
 	@RequestMapping("/list")
-	public void list(@RequestParam(value = "page", defaultValue = "1") int page, Model model) throws Exception {
+	public void list(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpSession session) throws Exception {
 
 //		model.addAttribute("today", Util.getToday());
-		model.addAllAttributes(service.getPage1(page));
+		try {
+			Member member = (Member)session.getAttribute("USER");
+			if(member != null) {
+				String userId = member.getUserId();
+				System.out.println("userId : " + userId);
+				model.addAllAttributes(service.getPage1(page, userId));			
+			}			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -71,7 +81,7 @@ public class BoardController {
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yy/MM/dd");
 		SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
 		SimpleDateFormat sdf4 = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
-		
+
 		String result = "";
 		Date time = new Date();
 		Date regDate = sdf4.parse(sdf4.format(time));
@@ -79,9 +89,9 @@ public class BoardController {
 		String regDateStr = sdf2.format(time);
 		int nowHour = Integer.parseInt(sdf3.format(time));
 		SleepType dayNight;
-		if(nowHour < 20 && nowHour > 9) {
+		if (nowHour < 20 && nowHour > 9) {
 			dayNight = SleepType.DAY;
-		}else {
+		} else {
 			dayNight = SleepType.NIGHT;
 		}
 
@@ -94,32 +104,32 @@ public class BoardController {
 			board.setSleepTime(nowTime);
 			board.setDayNight(dayNight);
 			board.setUpdateDate(regDate);
-			
+
 			service.create(board);
 			System.out.println(board);
 			result = "아기의 잠든 시간 : " + nowTime;
 		}
 		if (flag.equals("2")) {
 			// userId 확인해서 wakeupTime update하기
-			//service 추가 
+			// service 추가
 			Board board = service.getLastBoard(userId);
-			if(board == null) {
+			if (board == null) {
 				throw new Exception();
 			}
 			board.setWakeupTime(nowTime);
 			board.setUpdateDate(regDate);
 			String sleepTime = board.getSleepTime();
-			
+
 			long diff = sdf1.parse(nowTime).getTime() - sdf1.parse(sleepTime).getTime();
-			long sec = diff/1000;
-			long hour = sec/3600;
-			sec = sec%3600;
-			long min = sec/60;
+			long sec = diff / 1000;
+			long hour = sec / 3600;
+			sec = sec % 3600;
+			long min = sec / 60;
 			sec = sec % 60;
-			
-			String totalTime = hour+":"+min+":"+sec;
+
+			String totalTime = hour + ":" + min + ":" + sec;
 			board.setTotalTime(totalTime);
-			
+
 			service.updateWakeup(board);
 			System.out.println(board);
 			result = "아기의 수면 시간 : " + totalTime;
@@ -127,17 +137,19 @@ public class BoardController {
 		return result;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/android/list")
+	@RequestMapping(method = RequestMethod.POST, value = "/android/list")
 	public @ResponseBody String androidList(HttpServletRequest httpServletRequest) throws Exception {
-		ArrayList<Board> array = service.getPage2();
-		System.out.println(array);
+		String userId = httpServletRequest.getParameter("userId");
 		
+		ArrayList<Board> array = service.getPage2(userId);
+		System.out.println(array);
+
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonString = mapper.writeValueAsString(array);
 		System.out.println(jsonString);
 		return jsonString;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/android/view/{boardId}")
 	public @ResponseBody String androidView(HttpServletRequest httpServletRequest) throws Exception {
 		Long boardId = Long.parseLong(httpServletRequest.getParameter("boardId"));
@@ -155,25 +167,48 @@ public class BoardController {
 		return "board/view";
 	}
 
-	@RequestMapping(value = "/edit/{boardId}", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.POST, value = "/android/editMemo")
+	public @ResponseBody String androidEditMemo(HttpServletRequest httpServletRequest) throws Exception {
+		Long boardId = Long.parseLong(httpServletRequest.getParameter("boardId"));
+		String memo = httpServletRequest.getParameter("memo");
+		
+		System.out.println(boardId + " : " + memo);
+		if (memo != null) {
+			Board board = service.findById(boardId);
+			
+			System.out.println(board);
+			
+			board.setMemo(memo);
+//			board.setUpdateDate(new Date());
+			
+			service.updateMemo(board);
+			
+			System.out.println("memo update 완료");
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+
+	@RequestMapping(value = "/editMemo/{boardId}", method = RequestMethod.GET)
 	public String editForm(@PathVariable int boardId, Model model) throws Exception {
 		Board board = service.findById(boardId);
 		model.addAttribute("board", board);
 		return "board/edit";
 	}
 
-	@RequestMapping(value = "/edit/{boardId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editMemo/{boardId}", method = RequestMethod.POST)
 	public String editSubmit(@Valid Board board, BindingResult result, @RequestParam("page") int page,
 			MultipartHttpServletRequest request) throws Exception {
 		if (result.hasErrors())
-			return "board/edit";
+			return "board/editMemo";
 
 		try {
-			service.update(board);
+			service.updateMemo(board);
 		} catch (PasswordMissmatchException e) {
 			result.reject("updateFail", e.getMessage());
 
-			return "board/edit";
+			return "board/editMemo";
 		}
 
 		return "redirect:/board/view/" + board.getBoardId() + "?page=" + page;

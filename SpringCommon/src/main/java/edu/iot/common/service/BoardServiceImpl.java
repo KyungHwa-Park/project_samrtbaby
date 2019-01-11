@@ -18,19 +18,22 @@ public class BoardServiceImpl implements BoardService {
 	BoardDao dao;
 
 	@Override
-	public Map<String, Object> getPage1(int page) throws Exception {
+	public Map<String, Object> getPage1(int page, String userId) throws Exception {
 		Map<String, Object> map = new HashMap<>();
-
-		int total = dao.count();
+		Map<String, Object> map2 = new HashMap<>();
+		
+		int total = dao.count(userId);
 		Pagination pagination = new Pagination(page, total);
 		map.put("pagination", pagination);
-		map.put("list", dao.getPage1(pagination.getPageMap()));
+		map2.put("pageMap", pagination.getPageMap());
+		map2.put("userId", userId);
+		map.put("list", dao.getPage1(map2));
 		return map;
 	}
 
 	@Override
-	public ArrayList<Board> getPage2() throws Exception {
-		List<Board> array = dao.getPage2();
+	public ArrayList<Board> getPage2(String userId) throws Exception {
+		List<Board> array = dao.getPage2(userId);
 		ArrayList<Board> result = new ArrayList<>();
 		for(Board board : array) {
 			if(board != null) {
@@ -48,12 +51,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void update(Board board) throws Exception {
-		int result = dao.update(board);
-		if (result == 0) { // 비밀번호가 일치하지 않으면 sql update쿼리 적용 실패로 return값이 0 \
-//							(==> DB에서 SQL update 실패면 결과=0/update성공이면 결과=1)
-			throw new Exception();
-		}
+	public void updateMemo(Board board) throws Exception {
+		dao.updateMemo(board);
+//		if (result == 0) { // 비밀번호가 일치하지 않으면 sql update쿼리 적용 실패로 return값이 0 \
+////							(==> DB에서 SQL update 실패면 결과=0/update성공이면 결과=1)
+//			throw new Exception();
+//		}
 	}
 
 	@Override

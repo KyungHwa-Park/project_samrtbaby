@@ -17,9 +17,10 @@
 	
 	
 	<!-- Read -->
-	<select id="count" resultType="int">
+	<select id="count" parameterType="String" resultType="int">
 		select count(*)
 		from board
+		where user_id = #{userId}
 	</select>
 	
 	<select id="findById" parameterType="long" resultType="Board">
@@ -38,19 +39,21 @@
 		from (
 			select row_number() over (order by reg_date desc) as seq,
 					board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo, update_date
-			from board		
+			from board
+			where user_id = #{userId}
 		)
-		where seq between #{start} and #{end}
+		where seq between #{pageMap.start} and #{pageMap.end}
 		order by board_id desc					
 	</select>
 	
 		<!-- 목록용으로  memo 칼럼은 제외 -->
-	<select id="getPage2" resultType="Board">
+	<select id="getPage2" parameterType="String" resultType="Board">
 		select user_id, board_id, reg_date, reg_date_str, sleep_time, wakeup_time, total_time, day_night, memo, update_date
 		from (
 			select row_number() over (order by reg_date desc) as seq,
 					user_id, board_id, reg_date, reg_date_str, sleep_time, wakeup_time, total_time, day_night, memo, update_date
 			from board		
+			where user_id = #{userId}
 		)
 		where seq between 1 and 20
 		order by board_id desc					
@@ -71,10 +74,9 @@
 	
 	<!-- Update -->
 	<!-- 메모 추가용 -->
-	<update id="update" parameterType="Board">
-		update board 
-		set memo = #{memo},
-		update_time = #{updateTime};
+	<update id="updateMemo" parameterType="Board">
+		update board set 
+			memo = #{memo}
 		where board_id=#{boardId}
 	</update>
 	
