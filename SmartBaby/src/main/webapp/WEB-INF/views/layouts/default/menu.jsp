@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg #ffcdd2 red lighten-4">
+<nav class="navbar navbar-expand-lg peach-gradient">
 	<!-- Navbar brand -->
 	<a class="navbar-brand" href="${context}">HOME</a>
 

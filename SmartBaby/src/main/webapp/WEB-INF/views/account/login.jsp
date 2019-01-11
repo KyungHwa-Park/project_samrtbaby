@@ -5,7 +5,7 @@
    
 <div class="row" >
 	<div class="col-md-6 offset-md-3">
-		<h1 class="my-5">로그인</h1>  
+		<h2 class="my-5">로그인</h2>  
 		<form:form commandName="member">
 			<div class="md-form">
 				<label for="userId">사용자 ID</label>

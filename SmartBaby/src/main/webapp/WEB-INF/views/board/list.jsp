@@ -48,31 +48,38 @@
 	})
 </script>
 
-<iot:page-header icon="list" title="수면 기록" />
 
 <div class="container">
+	<h2 class="font-weight-bold deep-purple-text text-monospace">
+		<i class="fas fa-hourglass-half"></i>수면 기록
+	</h2>
+
 	<div class="row">
 		<div class="col-md-9">
-			<div class="text-right">
-				(총 ${pagination.total}건) 
-				<a href="../delete/${member.userId}?page=${param.page}" 
-					class="delete-btn btn btn-primary btn-sm">삭제</a>
+			<div class="text-right" style="margin-right: 20px">
+				(총 ${pagination.total}건) <a
+					href="../delete/${member.userId}?page=${param.page}"
+					class="delete-btn btn btn-deep-purple btn-sm">삭 제</a>
 			</div>
 
 			<table class="table table-stripped">
-				<thead>
+				<thead align="center">
 					<tr>
 						<th class="checkbox"><input type="checkbox" id="ck_all"></th>
-						<th style="width: 60px">No</th>
-						<th style="width: 120px">등록일</th>
-						<th style="width: 120px">잠든 시각</th>
-						<th style="width: 120px">일어난 시각</th>
-						<th style="width: 120px">수면 시간</th>
-						<th style="width: 120px">수면 타입</th>
-						<th style="width: 120px">memo</th>
+						<th style="width: 60px" class="font-weight-bold deep-purple-text">No.</th>
+						<th style="width: 120px" class="font-weight-bold deep-purple-text">등록일</th>
+						<th style="width: 120px" class="font-weight-bold deep-purple-text">잠든
+							시각</th>
+						<th style="width: 120px" class="font-weight-bold deep-purple-text">일어난
+							시각</th>
+						<th style="width: 120px" class="font-weight-bold deep-purple-text">수면
+							시간</th>
+						<th style="width: 120px" class="font-weight-bold deep-purple-text">수면
+							타입</th>
+						<th style="width: 120px" class="font-weight-bold deep-purple-text">memo</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody align="center">
 					<c:forEach var="board" items="${list}" varStatus="status">
 						<fmt:formatDate var="regDate" value="${board.regDate}"
 							pattern="yyyy-MM-dd" scope="request" />

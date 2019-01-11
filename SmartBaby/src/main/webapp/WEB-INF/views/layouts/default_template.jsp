@@ -55,7 +55,7 @@
 
 	<!--Footer--> 
 	<footer class="page-footer text-center text-md-left 
-								font-small #ffcdd2 red lighten-4 pt-4 mt-4 fixed-bottom">
+								font-small peach-gradient pt-4 mt-4 fixed-bottom">
 		<tiles:insertAttribute name="footer"/>
 	</footer> 
 	<!--Footer-->
