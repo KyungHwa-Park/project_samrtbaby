@@ -96,7 +96,7 @@
 										data-toggle="popover" data-placement="right" title="memo"
 										data-content="${board.memo}">memo</button>
 								</c:if> <c:if test="${board.memo == null}">
-									<a href="./editMemo"><i
+									<a href="./editMemo/${board.boardId}"><i
 										class="fas fa-plus-circle fa-lg"></i></a>
 								</c:if></td>
 						</tr>

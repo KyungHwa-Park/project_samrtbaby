@@ -209,17 +209,16 @@ public class BoardController {
 		}
 	}
 
-	@RequestMapping(value = "/editMemo", method = RequestMethod.GET)
+	@RequestMapping(value = "/editMemo/{boardId}", method = RequestMethod.GET)
 	public String editForm(@PathVariable long boardId, Model model) throws Exception {
 		Board board = service.findById(boardId);
 		model.addAttribute("board", board);
 		return "board/editMemo";
 	}
 
-	@RequestMapping(value = "/editMemo", method = RequestMethod.POST)
+	@RequestMapping(value = "/editMemo/{boardId}", method = RequestMethod.POST)
 	public String editSubmit(@Valid Board board, BindingResult result, 
-			@RequestParam("page") int page,
-			MultipartHttpServletRequest request) throws Exception {
+			HttpServletRequest request) throws Exception {
 		if (result.hasErrors())
 			return "board/editMemo";
 
@@ -231,7 +230,7 @@ public class BoardController {
 			return "board/editMemo";
 		}
 
-		return "redirect:/board/view/" + board.getBoardId() + "?page=" + page;
+		return "redirect:/board/list";
 	}
 
 	@ResponseBody
@@ -240,5 +239,4 @@ public class BoardController {
 		service.delete(boardId);
 		return "redirect:/board/list";
 	}
-
 }

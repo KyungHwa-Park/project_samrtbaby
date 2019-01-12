@@ -2,12 +2,11 @@ package edu.iot.common.model;
 
 import java.util.Date;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @AllArgsConstructor
@@ -16,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Board {
 	private String userId;
 	
-	@NotEmpty
+	@NonNull
 	private long boardId;
 	
 	private Date regDate;
