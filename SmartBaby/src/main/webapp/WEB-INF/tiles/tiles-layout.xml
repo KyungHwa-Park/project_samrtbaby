@@ -5,6 +5,13 @@
 
 <tiles-definitions>
 
+	<!-- (1) 레이아웃을 적용하지않는화면-->    
+    <definition name="home" template="/WEB-INF/views/home.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="" />
+        <put-attribute name="menu" value="" />        
+        <put-attribute name="footer" value="/WEB-INF/views/layouts/default/footer.jsp" />
+    </definition>
 
 
 	<!-- default : 템플릿에 설정된 페이지의 구성 요소에 대한 실제 파일 지정 -->

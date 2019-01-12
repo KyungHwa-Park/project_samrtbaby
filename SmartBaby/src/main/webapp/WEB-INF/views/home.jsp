@@ -5,8 +5,8 @@
 <html>
 <head>
 <style>
-body{
-	background-image:url("resources/images/Desert.jpg")
+body {
+	background-image: url("resources/images/Desert.jpg")
 }
 </style>
 </head>
@@ -15,14 +15,17 @@ body{
 	<div class="bg"></div>
 	<div class="row">
 		<div class="col-md-3 offset-md-3">
-			<div class="view overlay z-depth-1-half">
-				<img src="resources/images/Desert.jpg" class="card-img-top" alt="">
-				<div class="mask rgba-red-light"></div>
-			</div>
+			<a href="${context}/account/login"
+				class="btn btn-primary btn-md"> <i
+				class="fas fa-arrow-left mr-2"></i>로그인
+			</a>
+			<a href="${context}/account/join"
+				class="btn btn-primary btn-md"> <i
+				class="fas fa-arrow-left mr-2"></i>회원가입
+			</a>
+			<div class="col-md-3 offset-md-3"></div>
 		</div>
-		<div class="col-md-3 offset-md-3"></div>
 	</div>
-
 </body>
 </html>
 

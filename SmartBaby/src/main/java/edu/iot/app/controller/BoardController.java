@@ -209,15 +209,16 @@ public class BoardController {
 		}
 	}
 
-	@RequestMapping(value = "/editMemo/{boardId}", method = RequestMethod.GET)
-	public String editForm(@PathVariable int boardId, Model model) throws Exception {
+	@RequestMapping(value = "/editMemo", method = RequestMethod.GET)
+	public String editForm(@PathVariable long boardId, Model model) throws Exception {
 		Board board = service.findById(boardId);
 		model.addAttribute("board", board);
-		return "board/edit";
+		return "board/editMemo";
 	}
 
-	@RequestMapping(value = "/editMemo/{boardId}", method = RequestMethod.POST)
-	public String editSubmit(@Valid Board board, BindingResult result, @RequestParam("page") int page,
+	@RequestMapping(value = "/editMemo", method = RequestMethod.POST)
+	public String editSubmit(@Valid Board board, BindingResult result, 
+			@RequestParam("page") int page,
 			MultipartHttpServletRequest request) throws Exception {
 		if (result.hasErrors())
 			return "board/editMemo";

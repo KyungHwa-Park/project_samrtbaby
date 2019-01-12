@@ -96,10 +96,8 @@
 										data-toggle="popover" data-placement="right" title="memo"
 										data-content="${board.memo}">memo</button>
 								</c:if> <c:if test="${board.memo == null}">
-									<button type="button" id="addMemo"
-										class="btn btn-outline-rgba(244, 67, 54, 0.7) rgba-red-strong waves-effect btn-sm">
-										<i class="fas fa-plus-circle fa-lg"></i>
-									</button>
+									<a href="./editMemo"><i
+										class="fas fa-plus-circle fa-lg"></i></a>
 								</c:if></td>
 						</tr>
 					</c:forEach>

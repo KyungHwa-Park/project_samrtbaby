@@ -16,33 +16,29 @@
 
 	<!-- Collapsible content -->
 	<div class="collapse navbar-collapse" id="basicExampleNav">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item"><a class="nav-link" href="${context}/board/list">게시판</a></li>		
-		</ul>
 
 		<ul class="navbar-nav">
 			<!-- 로그인 사용자 -->
 			<c:if test="${not empty USER}">
-				<li class="nav-item">
-					 <a class="nav-link" href="${context}/account/logout">
-					 	<i class="fas fa-sign-out-alt"></i>
-					 	로그아웃</a>
-				</li>
+				<li class="nav-item"><a class="nav-link"
+					href="${context}/board/list">게시판</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${context}/account/logout"> <i
+						class="fas fa-sign-out-alt"></i> 로그아웃
+				</a></li>
 			</c:if>
-			 
+
 			<!-- 로그인 안한 사용자 -->
 			<c:if test="${empty USER}">
-				<li class="nav-item">
-					<a class="nav-link" href="${context}/account/login">
-						<i class="fas fa-sign-in-alt"></i>
-						로그인</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="${context}/account/join">
-						<i class="fas fa-user-circle"></i>
-						회원가입</a>
-				</li>
-			</c:if> 
+				<li class="nav-item"><a class="nav-link"
+					href="${context}/account/login"> <i class="fas fa-sign-in-alt"></i>
+						로그인
+				</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${context}/account/join"> <i class="fas fa-user-circle"></i>
+						회원가입
+				</a></li>
+			</c:if>
 		</ul>
 	</div>
 	<!-- Collapsible content -->

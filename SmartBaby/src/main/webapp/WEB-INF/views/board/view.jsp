@@ -50,7 +50,7 @@ $(function(){
 </script>
 
 
-<iot:page-header title="${board.title}"/>
+<iot:page-header title="${board.regDate}"/>
 
 <div class="row">
 	<div class="col-md-2">작성자</div>
