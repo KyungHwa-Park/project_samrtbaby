@@ -22,8 +22,8 @@
 
 <iot:page-header icon="eraser" title="메모 추가" />
 
-<form:form commandName="board" enctype="multipart/form-data">
-	<form:hidden path="boardId" value="${board.boardId}"/>
+<form:form commandName="memo" enctype="multipart/form-data">
+<!--  	<input type="hidden" name="location" value="${board.boardId}" />-->
 
 	<form:textarea path="memo" />
 
@@ -31,9 +31,9 @@
 		<button type="submit" class="btn btn-primary btn-md">
 			<i class="fas fa-check"></i>확인
 		</button>
-		<a href="../list?page=${param.page}" 
-			class="btn btn-primary btn-md">
-			<i class="fas fa-arrow-left mr-2"></i> 돌아가기</a>
+		<a href="list" class="btn btn-primary btn-md"> <i
+			class="fas fa-undo mr-2"></i>취소
+		</a>
 	</div>
 
 </form:form>
