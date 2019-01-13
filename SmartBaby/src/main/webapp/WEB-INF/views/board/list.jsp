@@ -9,7 +9,7 @@
 
 <style>
 body, html {
-	height: 100%;
+	
 	background-color: #8FBC8F;
 }
 </style>
@@ -55,10 +55,10 @@ body, html {
 	})
 </script>
 
-
-<div class="container" style="width:75%">
-	<h2 class="my-5 font-weight-bold deep-purple-text text-monospace">
-		<i class="fas fa-hourglass-half"></i>수면 기록
+<body>
+<div class="container" style="width:70%; height: 100%;">
+	<h2 class="my-5 font-weight-bold">
+		<i class="fas fa-hourglass-half"></i> &nbsp;&nbsp;수면 기록
 	</h2>
 
 	<div class="row">
@@ -73,17 +73,17 @@ body, html {
 			<thead align="center">
 				<tr>
 					<th class="checkbox"><input type="checkbox" id="ck_all"></th>
-					<th style="width: 60px" class="font-weight-bold deep-purple-text">No.</th>
-					<th style="width: 120px" class="font-weight-bold deep-purple-text">등록일</th>
-					<th style="width: 120px" class="font-weight-bold deep-purple-text">잠든
+					<th style="width: 60px" class="font-weight-bold">No.</th>
+					<th style="width: 120px" class="font-weight-bold">등록일</th>
+					<th style="width: 120px" class="font-weight-bold">잠든
 						시각</th>
-					<th style="width: 120px" class="font-weight-bold deep-purple-text">일어난
+					<th style="width: 120px" class="font-weight-bold">일어난
 						시각</th>
-					<th style="width: 120px" class="font-weight-bold deep-purple-text">수면
+					<th style="width: 120px" class="font-weight-bold">수면
 						시간</th>
-					<th style="width: 120px" class="font-weight-bold deep-purple-text">수면
+					<th style="width: 120px" class="font-weight-bold">수면
 						타입</th>
-					<th style="width: 120px" class="font-weight-bold deep-purple-text">memo</th>
+					<th style="width: 120px" class="font-weight-bold">memo</th>
 				</tr>
 			</thead>
 			<tbody align="center">
@@ -114,4 +114,4 @@ body, html {
 
 </div>
 
-
+</body>

@@ -63,44 +63,44 @@ body, html {
 <body>
 
 	<!-- Grid row -->
-	
 
-		<!--Card-->
-		<div class="card default-color-dark"
-			style="width: 60%; margin-left: auto; margin-right: auto; height: 100%">
 
-			<!--Card image-->
-			<div class="view">
-				<img src="resources/images/7d5373214990.png" style="height: 100%"
-					class="card-img-top" alt="photo">
-				<div class="mask rgba-white-slight"></div>
-			</div>
+	<!--Card-->
+	<div class="card default-color-dark"
+		style="width: 60%; margin-left: auto; margin-right: auto; height: 100%">
 
-			<!--Card content-->
-			<div class="card-body text-center"
-				style="position: relative; height: 450px;">
-				<!--Title-->
-				<h4 class="card-title white-text">SMART BABY</h4>
-				<!--Text-->
-				<p class="card-text white-text">Sed ut perspiciatis unde omnis
-					iste natus error sit voluptatem accusantium doloremque laudantium,
-					totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-					quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-					voluptatem quia voluptas.</p>
-				<div align="center"
-					style="position: absolute; bottom: 30px; left:40%;">
-					<a href="account/login"
-						class="btn btn-outline-white btn-md waves-effect">로그인</a> <a
-						href="account/join"
-						class="btn btn-outline-white btn-md waves-effect">회원가입</a>
-				</div>
-			</div>
-
+		<!--Card image-->
+		<div class="view">
+			<img src="resources/images/7d5373214990.png" style="height: 100%"
+				class="card-img-top" alt="photo">
+			<div class="mask rgba-white-slight"></div>
 		</div>
-		<!--/.Card-->
+
+		<!--Card content-->
+		<div class="card-body text-center"
+			style="position: relative; height: 450px;">
+			<!--Title-->
+			<h1 class="card-title white-text">SMART BABY</h1>
+			<!--Text-->
+			<p class="card-text black-text"><br>
+				소중한 우리 아기의 수면 패턴이 궁금하시다면?<br>
+				지금 SMART BABY 하세요!<br>
+				아기의 취침/기상을 자동으로 기록해 드립니다.<br>
+			</p>
+			<div align="center"
+				style="position: absolute; bottom: 30px; left: 38%;">
+				<a href="account/login"
+					class="btn btn-outline-white btn-md waves-effect">로그인</a> <a
+					href="account/join"
+					class="btn btn-outline-white btn-md waves-effect">회원가입</a>
+			</div>
+		</div>
+
+	</div>
+	<!--/.Card-->
 
 
-	
+
 
 </body>
 

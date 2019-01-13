@@ -2,7 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <ul
-	class="pagination pagination-circle pg-amber justify-content-center my-5">
+	class="pagination pagination-circle pg-amber justify-content-center my-5"
+	style="margin-left:auto; margin-right:auto;">
 	<c:if test="${pagination.currentBlock > 1}">
 		<li class="page-item"><a class="page-link" href="list?page=1"><span>처음</span></a>
 		</li>

@@ -62,62 +62,61 @@ body, html {
 
 <div class="container"
 	style="width: 60%; margin-left: auto; margin-right: auto;">
-	<div class="row">
-
-		<h2 class="my-5" align="center">
-			<i class="fas fa-user-circle fa-lg"></i> 회원가입
-		</h2>
-		<form:form commandName="member">
-			<div class="md-form">
-				<label for="userId">사용자 ID </label>
-				<form:input path="userId" class="form-control" />
-				<form:errors path="userId" element="div" cssClass="error" />
-			</div>
-
-			<p>
-				<button type="button" id="id-check">ID 중복 검사</button>
-				<span class="check-result">ID 중복검사를 하세요.</span>
-			</p>
-
-			<div class="md-form">
-				<label for="userId">비밀번호 </label>
-				<form:password path="password" class="form-control" />
-				<form:errors path="password" element="div" cssClass="error" />
-			</div>
-
-			<div class="md-form">
-				<label for="password2">비밀번호 확인</label> <input type="password"
-					id="password2" name="password2" class="form-control">
-			</div>
-
-			<div class="md-form">
-				<label for="parName">사용자 이름 </label>
-				<form:input path="parName" class="form-control" />
-				<form:errors path="parName" element="div" cssClass="error" />
-			</div>
-
-			<div class="md-form">
-				<label for="babyName">아기 이름 </label>
-				<form:input path="babyName" class="form-control" />
-				<form:errors path="babyName" element="div" cssClass="error" />
-			</div>
-
-			<div class="md-form">
-				<label for="email">email </label>
-				<form:input path="email" class="form-control" />
-				<form:errors path="email" element="div" cssClass="error" />
-			</div>
-
-			<p align="center">
-				<button type="submit" class="btn btn-primary" disabled>
-					<i class="fas fa-check"></i> 확인
-				</button>
-				<button type="reset" class="btn btn-success">
-					<i class="fas fa-undo"></i> 취소
-				</button>
-			</p>
 
 
-		</form:form>
-	</div>
+	<h2 class="my-5 font-weight-bold" align="center">
+		<i class="fas fa-user-circle fa-lg"></i>&nbsp;&nbsp;회원가입
+	</h2>
+	<form:form commandName="member">
+		<div class="md-form">
+			<label for="userId">사용자 ID </label>
+			<form:input path="userId" class="form-control" />
+			<form:errors path="userId" element="div" cssClass="error" />
+		</div>
+
+		<p>
+			<button type="button" id="id-check">ID 중복 검사</button>
+			<span class="check-result">ID 중복검사를 하세요.</span>
+		</p>
+
+		<div class="md-form">
+			<label for="userId">비밀번호 </label>
+			<form:password path="password" class="form-control" />
+			<form:errors path="password" element="div" cssClass="error" />
+		</div>
+
+		<div class="md-form">
+			<label for="password2">비밀번호 확인</label> <input type="password"
+				id="password2" name="password2" class="form-control">
+		</div>
+
+		<div class="md-form">
+			<label for="parName">사용자 이름 </label>
+			<form:input path="parName" class="form-control" />
+			<form:errors path="parName" element="div" cssClass="error" />
+		</div>
+
+		<div class="md-form">
+			<label for="babyName">아기 이름 </label>
+			<form:input path="babyName" class="form-control" />
+			<form:errors path="babyName" element="div" cssClass="error" />
+		</div>
+
+		<div class="md-form">
+			<label for="email">email </label>
+			<form:input path="email" class="form-control" />
+			<form:errors path="email" element="div" cssClass="error" />
+		</div>
+
+		<p align="center">
+			<button type="submit" class="btn btn-warning" disabled>
+				<i class="fas fa-check"></i> 확인
+			</button>
+			<button type="reset" class="btn btn-brown">
+				<i class="fas fa-undo"></i> 취소
+			</button>
+		</p>
+
+
+	</form:form>
 </div>
