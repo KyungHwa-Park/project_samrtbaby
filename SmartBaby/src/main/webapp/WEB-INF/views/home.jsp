@@ -43,7 +43,7 @@
 <style>
 body, html {
 	height: 100%;
-	background-color:#8FBC8F;
+	background-color: #8FBC8F;
 }
 
 .bg {
@@ -61,54 +61,47 @@ body, html {
 </head>
 
 <body>
+
+	<!-- Grid row -->
 	
-		<!-- Grid row -->
-		<div class="row" style="height: 100%">
-			<div class="col-md-3"></div>
-			<!-- Grid column -->
-			<div class="col-md-6">
 
-				<!--Card-->
-				<div class="card default-color-dark" style="height: 100%">
+		<!--Card-->
+		<div class="card default-color-dark"
+			style="width: 60%; margin-left: auto; margin-right: auto; height: 100%">
 
-					<!--Card image-->
-					<div class="view">
-						<img
-							src="resources/images/babyroom.jpg"
-							class="card-img-top" alt="photo"> 
-							<div class="mask rgba-white-slight"></div>
-					</div>
-
-					<!--Card content-->
-					<div class="card-body text-center" style="position:relative;height:710px;">
-						<!--Title-->
-						<h4 class="card-title white-text">SMART BABY</h4>
-						<!--Text-->
-						<p class="card-text white-text">Sed ut perspiciatis unde omnis
-							iste natus error sit voluptatem accusantium doloremque
-							laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-							veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-							Nemo enim ipsam voluptatem quia voluptas.</p>
-						<div align="center" style="position:absolute; bottom:30px;right:200px;">
-							<a href="account/login"
-								class="btn btn-outline-white btn-md waves-effect">로그인</a> <a
-								href="account/join"
-								class="btn btn-outline-white btn-md waves-effect">회원가입</a>
-						</div>
-					</div>
-
-				</div>
-				<!--/.Card-->
-				
-
+			<!--Card image-->
+			<div class="view">
+				<img src="resources/images/7d5373214990.png" style="height: 100%"
+					class="card-img-top" alt="photo">
+				<div class="mask rgba-white-slight"></div>
 			</div>
-			<!-- Grid column -->
-			<div class="col-md-3"></div>
+
+			<!--Card content-->
+			<div class="card-body text-center"
+				style="position: relative; height: 450px;">
+				<!--Title-->
+				<h4 class="card-title white-text">SMART BABY</h4>
+				<!--Text-->
+				<p class="card-text white-text">Sed ut perspiciatis unde omnis
+					iste natus error sit voluptatem accusantium doloremque laudantium,
+					totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
+					quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+					voluptatem quia voluptas.</p>
+				<div align="center"
+					style="position: absolute; bottom: 30px; left:40%;">
+					<a href="account/login"
+						class="btn btn-outline-white btn-md waves-effect">로그인</a> <a
+						href="account/join"
+						class="btn btn-outline-white btn-md waves-effect">회원가입</a>
+				</div>
+			</div>
 
 		</div>
-		<!-- Grid row -->
+		<!--/.Card-->
+
 
 	
+
 </body>
 
 </html>

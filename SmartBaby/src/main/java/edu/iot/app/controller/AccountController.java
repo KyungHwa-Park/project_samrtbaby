@@ -46,7 +46,7 @@ public class AccountController {
 			member = service.login(member.getUserId(), member.getPassword());
 			// 성공하면
 			session.setAttribute("USER", member);
-			return "redirect:/";
+			return "board/list";
 		} catch (LoginFailException e) {
 			// 실패하면
 			model.addAttribute("error", e.getMessage());

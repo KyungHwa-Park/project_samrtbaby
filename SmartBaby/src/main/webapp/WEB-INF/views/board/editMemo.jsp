@@ -6,6 +6,13 @@
 
 <%@ taglib tagdir="/WEB-INF/tags/util" prefix="iot"%>
 
+<style>
+body, html {
+	height: 100%;
+	background-color: #8FBC8F;
+}
+</style>
+
 <script
 	src="${context}/resources/bower_components/tinymce/tinymce.min.js">
 	

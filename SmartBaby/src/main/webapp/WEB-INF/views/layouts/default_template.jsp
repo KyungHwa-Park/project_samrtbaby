@@ -50,14 +50,17 @@
 	<!--Main Navigation-->
 
 	<!--Main layout-->
-	<main class="container"> <tiles:insertAttribute name="body" /> </main>
+	<main class="container"> <tiles:insertAttribute name="body" />
+	</main>
 	<!--Main layout-->
 
-	<!--Footer--> 
-	<footer class="page-footer text-center text-md-left 
-								font-small peach-gradient pt-4 mt-4 fixed-bottom">
-		<tiles:insertAttribute name="footer"/>
-	</footer> 
+	<!--Footer-->
+	<footer
+		class="page-footer text-center text-md-left 
+								font-small #00695c teal darken-3 pt-4 mt-4 fixed-bottom"
+		style="width: 60%; margin-left: auto; margin-right: auto;">
+		<tiles:insertAttribute name="footer" />
+	</footer>
 	<!--Footer-->
 
 </body>
