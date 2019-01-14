@@ -9,8 +9,11 @@
 
 <style>
 body, html {
-	
 	background-color: #8FBC8F;
+}
+
+td {
+	vertical-align: middle !important;
 }
 </style>
 
@@ -27,41 +30,25 @@ body, html {
 		});
 	});
 
-	// 체크된 행 삭제 기능
-	$(function() {
-		var ckBoardId = document.getElementByName("boardId");
-		$('.delete-btn').click(function(e) {
-			e.preventDefault();
-			var result = confirm('${board.boardId} 기록을 삭제할까요?');
-			if (result && $("#ck_row").prop("checked")) {
-				location = $(this).attr('href');
-			}
-		})
-	});
-
-	// 메모 추가 기능
-	var memo = '<p>새문단입니다.</p>'
-
-	$(function() {
-		$('#addMemo').click(function() {
-			var addMemo = $(memo);
-			addMemo.appendTo('#memoLocation');
-		});
-	});
-
 	// 메모 보기 기능
 	$(function() {
 		$('[data-toggle="popover"]').popover()
 	})
+	
+	
+	$(function() {
+		$('#day').click(function() {
+			
+		}
+	})
 </script>
 
 <body>
-<div class="container" style="width:70%; height: 100%;">
-	<h2 class="my-5 font-weight-bold">
-		<i class="fas fa-hourglass-half"></i> &nbsp;&nbsp;수면 기록
-	</h2>
+	<div class="container" style="width: 70%; height: 100%;">
+		<h2 class="my-5 font-weight-bold">
+			<i class="fas fa-hourglass-half"></i> &nbsp;&nbsp;수면 기록
+		</h2>
 
-	<div class="row">
 		<!-- 
 		<div class="text-right" style="margin-right: 0px">
 			(총 ${pagination.total}건) <a
@@ -69,20 +56,22 @@ body, html {
 				class="delete-btn btn btn-deep-purple btn-sm">삭 제</a>
 		</div> 	-->
 
+		<div class="text-right" style="margin-right: 0px">
+			<button class="btn btn-primary btn-sm" id="all">All</button>
+			<button class="btn btn-primary btn-sm" id="day">낮잠</button>
+			<button class="btn btn-primary btn-sm" id="night">밤잡</button>
+		</div>
+
 		<table class="table table-stripped">
 			<thead align="center">
 				<tr>
 					<th class="checkbox"><input type="checkbox" id="ck_all"></th>
 					<th style="width: 60px" class="font-weight-bold">No.</th>
 					<th style="width: 120px" class="font-weight-bold">등록일</th>
-					<th style="width: 120px" class="font-weight-bold">잠든
-						시각</th>
-					<th style="width: 120px" class="font-weight-bold">일어난
-						시각</th>
-					<th style="width: 120px" class="font-weight-bold">수면
-						시간</th>
-					<th style="width: 120px" class="font-weight-bold">수면
-						타입</th>
+					<th style="width: 120px" class="font-weight-bold">잠든 시각</th>
+					<th style="width: 120px" class="font-weight-bold">일어난 시각</th>
+					<th style="width: 120px" class="font-weight-bold">수면 시간</th>
+					<th style="width: 120px" class="font-weight-bold">수면 타입</th>
 					<th style="width: 120px" class="font-weight-bold">memo</th>
 				</tr>
 			</thead>
@@ -95,15 +84,24 @@ body, html {
 						<td id="boardId">${board.boardId}</td>
 						<td>${regDate}</td>
 						<td>${board.sleepTime}</td>
-						<td>${board.wakeupTime}</td>
-						<td>${board.totalTime}</td>
+						<td><c:if test="${board.wakeupTime != null}">
+								${board.wakeupTime}
+							</c:if> <c:if test="${board.wakeupTime == null}">
+								자는 중
+							</c:if></td>
+						<td><c:if test="${board.totalTime != null}">
+								${board.totalTime}
+							</c:if> <c:if test="${board.totalTime == null}">
+								자는 중
+							</c:if></td>
 						<td>${board.dayNight}</td>
 						<td><c:if test="${board.memo != null}">
 								<button type="button" class="btn peach-gradient btn-sm"
 									data-toggle="popover" data-placement="right" title="memo"
 									data-content="${board.memo}">memo</button>
 							</c:if> <c:if test="${board.memo == null}">
-								<a href="./editMemo"><i class="fas fa-plus-circle fa-lg"></i></a>
+								<a href="./editMemo/${board.boardId}"><i
+									class="fas fa-plus-circle fa-lg"></i></a>
 							</c:if></td>
 					</tr>
 				</c:forEach>
@@ -111,7 +109,4 @@ body, html {
 		</table>
 		<iot:pagination />
 	</div>
-
-</div>
-
 </body>

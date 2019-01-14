@@ -25,8 +25,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.iot.common.exception.PasswordMissmatchException;
 import edu.iot.common.model.Board;
 import edu.iot.common.model.Member;
+import edu.iot.common.model.Search;
 import edu.iot.common.model.SleepType;
 import edu.iot.common.service.BoardService;
+import edu.iot.common.util.Util;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -217,14 +219,17 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/editMemo/{boardId}", method = RequestMethod.POST)
-	public String editSubmit(@Valid Board board, BindingResult result, 
-			HttpServletRequest request) throws Exception {
-		if (result.hasErrors())
+	public String editSubmit(Board board, BindingResult result, HttpServletRequest request) throws Exception {
+		if (result.hasErrors()) {
+			System.out.println("update Fail : result Error");
 			return "board/editMemo";
+		}
 
 		try {
 			service.updateMemo(board);
-		} catch (PasswordMissmatchException e) {
+
+		} catch (Exception e) {
+			System.out.println("update Fail : Exception");
 			result.reject("updateFail", e.getMessage());
 
 			return "board/editMemo";
@@ -239,4 +244,31 @@ public class BoardController {
 		service.delete(boardId);
 		return "redirect:/board/list";
 	}
+
+	
+	
+//	@RequestMapping("/search")
+//	public void search(Search search,  
+//						Model model) throws Exception {
+//		model.addAttribute("today", Util.getToday());
+//		model.addAttribute("list", service.search(search));
+//	}
+
+//	@RequestMapping("/list")
+//	public void search(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpSession session)
+//			throws Exception {
+//
+////		model.addAttribute("today", Util.getToday());
+//		try {
+//			Member member = (Member) session.getAttribute("USER");
+//			if (member != null) {
+//				String userId = member.getUserId();
+//				System.out.println("userId : " + userId);
+//				model.addAllAttributes(service.getPage1(page, userId));
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+
 }

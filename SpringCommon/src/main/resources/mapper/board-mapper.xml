@@ -75,9 +75,9 @@
 	<!-- Update -->
 	<!-- 메모 추가용 -->
 	<update id="updateMemo" parameterType="Board">
-		update board set 
-			memo = #{memo}
-		where board_id=#{boardId}
+		update board set
+			memo = #{memo, jdbcType=CLOB}
+		where board_id = #{boardId, jdbcType= NUMERIC}
 	</update>
 	
 		<!--기상 시간 추가용 -->
@@ -96,6 +96,26 @@
 		delete from board
 		where board_id = #{boardId}
 	</delete>
+	
+	
+	
+	<!--  밤잠/낮잠 정렬
+	<select id="search" parameterType="String" resultType="Board">
+		select board_id, reg_date, reg_date_str, sleep_time, wakeup_time, total_time, day_night, update_date
+		from (
+			select row_number() over (order by board_id desc) as seq,
+					board_id, user_id, reg_date, reg_date_str, sleep_time, wakeup_time, total_time, day_night, update_date
+			from board
+			where user_id = #{userId}
+		)
+		where day_night = #{dayNight}
+	</select>
+	<select id="count1" parameterType="SleepType" resultType="int">
+		select count(*)
+		from board
+		where day_night = #{dayNight}
+	</select>
+	-->
 
 
 </mapper>

@@ -23,7 +23,8 @@
 			<!-- 로그인 사용자 -->
 			<c:if test="${not empty USER}">
 				<li class="nav-item"><a class="nav-link"
-					href="${context}/board/list">수면기록</a></li>
+					href="${context}/board/list">
+					<i class="fas fa-hourglass-half"></i> 수면기록</a></li>&nbsp;&nbsp;
 				<li class="nav-item"><a class="nav-link"
 					href="${context}/account/logout"> <i
 						class="fas fa-sign-out-alt"></i> 로그아웃

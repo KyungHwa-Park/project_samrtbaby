@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import edu.iot.common.dao.BoardDao;
 import edu.iot.common.model.Board;
 import edu.iot.common.model.Pagination;
+import edu.iot.common.model.Search;
+import edu.iot.common.model.SleepType;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -97,5 +99,28 @@ public class BoardServiceImpl implements BoardService {
 		Board board = dao.getLastBoard(userId);
 		return board;
 	}
+
+	
+	
+	
+	
+//	@Override
+//	public List<Board> search(Search search) throws Exception {
+//		return dao.search(search);
+//	}	
+
+//	@Override
+//	public Map<String, Object> getSearch(int page, String userId, SleepType dayNight) throws Exception {
+//		Map<String, Object> map = new HashMap<>();
+//		Map<String, Object> map2 = new HashMap<>();
+//
+//		int total = dao.count1(dayNight);
+//		Pagination pagination = new Pagination(page, total);
+//		map.put("pagination", pagination);
+//		map2.put("pageMap", pagination.getPageMap());
+//		map2.put("userId", userId);
+//		map.put("list", dao.getPage1(map2));
+//		return map;
+//	}
 
 }

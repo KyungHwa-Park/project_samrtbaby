@@ -71,28 +71,36 @@ body, html {
 
 		<!--Card image-->
 		<div class="view">
-			<img src="resources/images/7d5373214990.png" style="height: 100%"
+			<img src="resources/images/7d5373214990.png" style="width: 100%"
 				class="card-img-top" alt="photo">
 			<div class="mask rgba-white-slight"></div>
 		</div>
 
 		<!--Card content-->
 		<div class="card-body text-center"
-			style="position: relative; height: 450px;">
+			style="position: relative; height: 450px;
+					border-width:7px; border-style:solid; border-color:white">
 			<!--Title-->
-			<h1 class="card-title white-text">SMART BABY</h1>
+			<h1 class="card-title white-text"><br>SMART BABY</h1>
 			<!--Text-->
-			<p class="card-text black-text"><br>
-				소중한 우리 아기의 수면 패턴이 궁금하시다면?<br>
-				지금 SMART BABY 하세요!<br>
+			<p class="card-text black-text"><br><br>
+				<br> 소중한 우리 아기의 수면 패턴이 궁금하시다면?<br> 지금 SMART BABY 하세요!<br>
 				아기의 취침/기상을 자동으로 기록해 드립니다.<br>
 			</p>
 			<div align="center"
-				style="position: absolute; bottom: 30px; left: 38%;">
-				<a href="account/login"
-					class="btn btn-outline-white btn-md waves-effect">로그인</a> <a
-					href="account/join"
-					class="btn btn-outline-white btn-md waves-effect">회원가입</a>
+				style="position: absolute; bottom: 30px; left: 37%;">
+				<c:if test="${empty USER}">
+					<a href="account/login"
+						class="btn btn-outline-white btn-md waves-effect">로그인</a>
+					<a href="account/join"
+						class="btn btn-outline-white btn-md waves-effect">회원가입</a>
+				</c:if>
+				<c:if test="${not empty USER}">
+					<a href="board/list"
+						class="btn btn-outline-white btn-md waves-effect">수면기록</a>
+					<a class="btn btn-outline-white btn-md waves-effect"
+						href="${context}/account/logout"> 로그아웃 </a>
+				</c:if>
 			</div>
 		</div>
 

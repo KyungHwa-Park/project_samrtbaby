@@ -19,4 +19,5 @@ public interface CrudDao<M, K>{
 	
 //	Delete (DML : DELETE)
 	int delete(K k) throws Exception;
+
 }

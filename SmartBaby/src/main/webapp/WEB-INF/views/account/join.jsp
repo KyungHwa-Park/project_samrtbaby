@@ -61,7 +61,7 @@ body, html {
 </script>
 
 <div class="container"
-	style="width: 60%; margin-left: auto; margin-right: auto;">
+	style="width: 60%; margin-left: auto; margin-right: auto; margin-top:10%">
 
 
 	<h2 class="my-5 font-weight-bold" align="center">

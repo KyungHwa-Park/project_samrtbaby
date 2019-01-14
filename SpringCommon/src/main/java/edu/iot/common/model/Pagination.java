@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class Pagination {
-	public static final int PER_PAGE = 10;	// 1페이지당 데이터 건수
+	public static final int PER_PAGE = 7;	// 1페이지당 데이터 건수
 	public static final int PER_BLOCK = 10;	// 1블럭당 페이지 수
 	
 	private int total;			// 전체 데이터 건 수

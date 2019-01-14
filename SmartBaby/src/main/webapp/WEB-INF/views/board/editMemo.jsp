@@ -29,10 +29,9 @@ body, html {
 
 <iot:page-header icon="eraser" title="메모 추가" />
 
-<form:form commandName="memo" enctype="multipart/form-data">
-<!--  	<input type="hidden" name="location" value="${board.boardId}" />-->
+<form:form commandName="board" enctype="multipart/form-data">
 
-	<form:textarea path="memo" />
+	<form:textarea path="memo"/>
 
 	<div class="text-center mt-3">
 		<button type="submit" class="btn btn-primary btn-md">

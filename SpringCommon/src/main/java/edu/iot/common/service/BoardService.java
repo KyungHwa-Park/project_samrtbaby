@@ -1,9 +1,12 @@
 package edu.iot.common.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import edu.iot.common.model.Board;
+import edu.iot.common.model.Search;
+import edu.iot.common.model.SleepType;
 
 public interface BoardService {
 	
@@ -16,5 +19,11 @@ public interface BoardService {
 	public void updateWakeup(Board board) throws Exception;
 	
 	public boolean delete(long boardId) throws Exception;
+	
+	
+	
+	
+//	List<Board> search(Search search) throws Exception;
+//	Map<String, Object> getSearch(int page, String userId, SleepType dayNight) throws Exception;
 	
 }

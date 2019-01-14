@@ -12,7 +12,7 @@ html, body {
 
 <html>
 <body>
-	<div style="height: 96%;">
+	<div style="height: 96%; margin-top:20%">
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
 				<h2 class="my-5 font-weight-bold" align="center">
