@@ -34,13 +34,17 @@ td {
 	$(function() {
 		$('[data-toggle="popover"]').popover()
 	})
-	
-	
+
 	$(function() {
 		$('#day').click(function() {
-			
-		}
+
+		})
 	})
+
+	function showPopup() {
+		window.open("resuorces/images/guidelines.jpg", "a",
+				"width=400, height=300, left=100, top=50");
+	}
 </script>
 
 <body>
@@ -57,6 +61,7 @@ td {
 		</div> 	-->
 
 		<div class="text-right" style="margin-right: 0px">
+			<input type="button" value="guide line" onclick="showPopup();" />
 			<button class="btn btn-primary btn-sm" id="all">All</button>
 			<button class="btn btn-primary btn-sm" id="day">낮잠</button>
 			<button class="btn btn-primary btn-sm" id="night">밤잡</button>

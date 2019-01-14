@@ -34,7 +34,7 @@
 			<!-- 로그인 안한 사용자 -->
 			<c:if test="${empty USER}">
 				<li class="nav-item"><a class="nav-link"
-					href="${context}/account/login"> <i class="fas fa-sign-in-alt"></i>
+					href="${context}/account/login"> <i class="far fa-comment-dots"></i>
 						로그인
 				</a></li>
 				<li class="nav-item"><a class="nav-link"
