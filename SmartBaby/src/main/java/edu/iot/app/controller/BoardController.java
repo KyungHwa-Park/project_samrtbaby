@@ -1,11 +1,17 @@
 package edu.iot.app.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -22,13 +28,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import edu.iot.common.exception.PasswordMissmatchException;
 import edu.iot.common.model.Board;
 import edu.iot.common.model.Member;
-import edu.iot.common.model.Search;
 import edu.iot.common.model.SleepType;
 import edu.iot.common.service.BoardService;
-import edu.iot.common.util.Util;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -219,17 +222,20 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/editMemo/{boardId}", method = RequestMethod.POST)
-	public String editSubmit(Board board, BindingResult result, HttpServletRequest request) throws Exception {
+	public String editSubmit(@Valid Board board, BindingResult result, MultipartHttpServletRequest request) throws Exception {
 		if (result.hasErrors()) {
 			System.out.println("update Fail : result Error");
 			return "board/editMemo";
 		}
+		String memo = request.getParameter("memo");
+		System.out.println(memo);
 
 		try {
 			service.updateMemo(board);
+			System.out.println(board);
 
 		} catch (Exception e) {
-			System.out.println("update Fail : Exception");
+			System.out.println(e.getMessage());
 			result.reject("updateFail", e.getMessage());
 
 			return "board/editMemo";
@@ -243,6 +249,38 @@ public class BoardController {
 	public String delete(@PathVariable long boardId) throws Exception {
 		service.delete(boardId);
 		return "redirect:/board/list";
+	}
+	
+	@RequestMapping(value = "/guideLine", method = RequestMethod.GET)
+	public void getImage(HttpServletRequest req, HttpSession session, HttpServletResponse res, @RequestParam HashMap<String, String> map) throws Exception {
+
+		String realFile = "/resources/images/guidelines.jpg";
+		String fileNm = "guidelines";
+		String ext = ".jpg";
+
+		BufferedOutputStream out = null;
+		InputStream in = null;
+
+		try {
+			res.setContentType("image/" + ext);
+			res.setHeader("Content-Disposition", "inline;filename=" + fileNm);
+			File file = new File(realFile);
+			if(file.exists()){
+				in = new FileInputStream(file);
+				out = new BufferedOutputStream(res.getOutputStream());
+				int len;
+				byte[] buf = new byte[1024];
+				while ((len = in.read(buf)) > 0) {
+					out.write(buf, 0, len);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null){ out.flush(); }
+			if(out != null){ out.close(); }
+			if(in != null){ in.close(); }
+		}
 	}
 
 	

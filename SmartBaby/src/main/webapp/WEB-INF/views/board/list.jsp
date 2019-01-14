@@ -42,14 +42,14 @@ td {
 	})
 
 	function showPopup() {
-		window.open("resuorces/images/guidelines.jpg", "a",
+		window.open("/board/guideLine", "a",
 				"width=400, height=300, left=100, top=50");
 	}
 </script>
 
 <body>
 	<div class="container" style="width: 70%; height: 100%;">
-		<h2 class="my-5 font-weight-bold">
+		<h2 class="my-4 font-weight-bold">
 			<i class="fas fa-hourglass-half"></i> &nbsp;&nbsp;수면 기록
 		</h2>
 

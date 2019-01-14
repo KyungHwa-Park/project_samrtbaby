@@ -76,7 +76,8 @@
 	<!-- 메모 추가용 -->
 	<update id="updateMemo" parameterType="Board">
 		update board set
-			memo = #{memo, jdbcType=CLOB}
+			memo = #{memo},
+			update_date = sysdate
 		where board_id = #{boardId, jdbcType= NUMERIC}
 	</update>
 	

@@ -22,6 +22,7 @@ body, html {
 	$(function() {
 		tinymce.init({
 			selector : 'textarea',
+			language : 'ko_KR',
 			height : "300"
 		});
 	});
@@ -29,7 +30,7 @@ body, html {
 
 <iot:page-header icon="eraser" title="메모 추가" />
 
-<form:form commandName="board" enctype="multipart/form-data">
+<form:form commandName="board" enctype="multipart/form-data" method="POST">
 
 	<form:textarea path="memo"/>
 

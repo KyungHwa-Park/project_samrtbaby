@@ -4,7 +4,7 @@
 <%@ attribute name="icon" required="false" type="String" %>
 <%@ attribute name="title" required="true" type="String" %>
 
-<h1 class="my-5">
+<h1 class="my-3">
 	<c:if test="${not empty icon}">
 		<i class="fas fa-${icon}"></i>
 	</c:if>	
