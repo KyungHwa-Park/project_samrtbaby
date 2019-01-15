@@ -1,21 +1,19 @@
 package edu.iot.app.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -53,8 +51,45 @@ public class BoardController {
 			Member member = (Member) session.getAttribute("USER");
 			if (member != null) {
 				String userId = member.getUserId();
-				System.out.println("userId : " + userId);
 				model.addAllAttributes(service.getPage1(page, userId));
+				System.out.println("List 호출 / userId : " + userId);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/listDay")
+	public void listDay(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpSession session)
+			throws Exception {
+
+//		model.addAttribute("today", Util.getToday());
+		try {
+			Member member = (Member) session.getAttribute("USER");
+			if (member != null) {
+				String userId = member.getUserId();
+				SleepType dayNight = SleepType.DAY;
+				System.out.println("userId : " + userId);
+				model.addAllAttributes(service.getPage1Sel(page, userId, dayNight));
+				System.out.println("ListDay 호출 / userId : " + userId);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/listNight")
+	public void listNight(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpSession session)
+			throws Exception {
+
+//		model.addAttribute("today", Util.getToday());
+		try {
+			Member member = (Member) session.getAttribute("USER");
+			if (member != null) {
+				String userId = member.getUserId();
+				SleepType dayNight = SleepType.NIGHT;
+				model.addAllAttributes(service.getPage1Sel(page, userId, dayNight));
+				System.out.println("ListNight 호출 / userId : " + userId);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,7 +147,7 @@ public class BoardController {
 			board.setUpdateDate(regDate);
 
 			service.create(board);
-			System.out.println(board);
+			System.out.println("Board 생성 완료 - boardId : " + board.getBoardId());
 			result = "아기의 잠든 시간 : " + nowTime;
 		}
 		if (flag.equals("2")) {
@@ -155,7 +190,7 @@ public class BoardController {
 			board.setTotalTime(totalTime);
 
 			service.updateWakeup(board);
-			System.out.println(board);
+			System.out.println("Board 수정 완료 - boardId : " + board.getBoardId());
 			result = "아기의 수면 시간 : " + totalTime;
 		}
 		return result;
@@ -166,11 +201,10 @@ public class BoardController {
 		String userId = httpServletRequest.getParameter("userId");
 
 		ArrayList<Board> array = service.getPage2(userId);
-		System.out.println(array);
-
+		System.out.println("리스트 서비스 호출  - userId : " + userId);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonString = mapper.writeValueAsString(array);
-		System.out.println(jsonString);
+		System.out.println("json 전송 완료");
 		return jsonString;
 	}
 
@@ -218,6 +252,7 @@ public class BoardController {
 	public String editForm(@PathVariable long boardId, Model model) throws Exception {
 		Board board = service.findById(boardId);
 		model.addAttribute("board", board);
+		System.out.println("Web memo tinyMce 실행");
 		return "board/editMemo";
 	}
 
@@ -228,11 +263,14 @@ public class BoardController {
 			return "board/editMemo";
 		}
 		String memo = request.getParameter("memo");
+		
+		memo = memo.replace("<p>", "");
+		memo = memo.replace("</p>", "");
+		board.setMemo(memo);
 		System.out.println(memo);
-
 		try {
 			service.updateMemo(board);
-			System.out.println(board);
+			System.out.println("Web memo 수정 완료 - boardId : " + memo);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -250,40 +288,7 @@ public class BoardController {
 		service.delete(boardId);
 		return "redirect:/board/list";
 	}
-	
-	@RequestMapping(value = "/guideLine", method = RequestMethod.GET)
-	public void getImage(HttpServletRequest req, HttpSession session, HttpServletResponse res, @RequestParam HashMap<String, String> map) throws Exception {
 
-		String realFile = "/resources/images/guidelines.jpg";
-		String fileNm = "guidelines";
-		String ext = ".jpg";
-
-		BufferedOutputStream out = null;
-		InputStream in = null;
-
-		try {
-			res.setContentType("image/" + ext);
-			res.setHeader("Content-Disposition", "inline;filename=" + fileNm);
-			File file = new File(realFile);
-			if(file.exists()){
-				in = new FileInputStream(file);
-				out = new BufferedOutputStream(res.getOutputStream());
-				int len;
-				byte[] buf = new byte[1024];
-				while ((len = in.read(buf)) > 0) {
-					out.write(buf, 0, len);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(out != null){ out.flush(); }
-			if(out != null){ out.close(); }
-			if(in != null){ in.close(); }
-		}
-	}
-
-	
 	
 //	@RequestMapping("/search")
 //	public void search(Search search,  

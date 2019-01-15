@@ -32,6 +32,24 @@ public class BoardServiceImpl implements BoardService {
 		map.put("list", dao.getPage1(map2));
 		return map;
 	}
+	
+	@Override
+	public Map<String, Object> getPage1Sel(int page, String userId, SleepType dayNight) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map2 = new HashMap<>();
+		Map<String, Object> map3 = new HashMap<>();
+		
+		map3.put("userId", userId);
+		map3.put("dayNight", dayNight);
+		int total = dao.count1(map3);
+		Pagination pagination = new Pagination(page, total);
+		map.put("pagination", pagination);
+		map2.put("pageMap", pagination.getPageMap());
+		map2.put("userId", userId);
+		map2.put("dayNight", dayNight);
+		map.put("list", dao.getPage1Sel(map2));
+		return map;
+	}
 
 	@Override
 	public ArrayList<Board> getPage2(String userId) throws Exception {
@@ -99,6 +117,8 @@ public class BoardServiceImpl implements BoardService {
 		Board board = dao.getLastBoard(userId);
 		return board;
 	}
+
+
 
 	
 	

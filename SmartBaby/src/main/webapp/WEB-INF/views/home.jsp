@@ -83,7 +83,7 @@ body, html {
 			<!--Title-->
 			<h1 class="card-title white-text"><br>SMART BABY</h1>
 			<!--Text-->
-			<p class="card-text black-text"><br><br>
+			<p class="card-text white-text"><br><br>
 				<br> 소중한 우리 아기의 수면 패턴이 궁금하시다면?<br> 지금 SMART BABY 하세요!<br>
 				아기의 취침/기상을 자동으로 기록해 드립니다.<br>
 			</p>

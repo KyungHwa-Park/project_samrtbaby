@@ -23,6 +23,12 @@
 		where user_id = #{userId}
 	</select>
 	
+	<select id="count1" parameterType="map" resultType="int">
+		select count(*)
+		from board
+		where user_id = #{userId} and day_night = #{dayNight}
+	</select>
+	
 	<select id="findById" parameterType="long" resultType="Board">
 		select * from board
 		where board_id = #{boardId}
@@ -45,6 +51,19 @@
 		where seq between #{pageMap.start} and #{pageMap.end}
 		order by board_id desc					
 	</select>
+	<!-- 목록용으로  memo 칼럼은 제외 -->
+	<select id="getPage1Sel" parameterType="map"
+						resultType="Board">
+		select board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo, update_date
+		from (
+			select row_number() over (order by reg_date desc) as seq,
+					board_id, reg_date, sleep_time, wakeup_time, total_time, day_night, memo, update_date
+			from board
+			where user_id = #{userId} and day_night = #{dayNight}
+		)
+		where seq between #{pageMap.start} and #{pageMap.end}
+		order by board_id desc					
+	</select>
 	
 		<!-- 목록용으로  memo 칼럼은 제외 -->
 	<select id="getPage2" parameterType="String" resultType="Board">
@@ -55,7 +74,7 @@
 			from board		
 			where user_id = #{userId}
 		)
-		where seq between 1 and 20
+		where seq between 1 and 100
 		order by board_id desc					
 	</select>
 	
@@ -109,11 +128,6 @@
 			from board
 			where user_id = #{userId}
 		)
-		where day_night = #{dayNight}
-	</select>
-	<select id="count1" parameterType="SleepType" resultType="int">
-		select count(*)
-		from board
 		where day_night = #{dayNight}
 	</select>
 	-->

@@ -46,6 +46,7 @@ public class AccountController {
 			member = service.login(member.getUserId(), member.getPassword());
 			// 성공하면
 			session.setAttribute("USER", member);
+			System.out.println("Web Login OK : " + member.getUserId());
 			
 			return "redirect:/board/list";
 		} catch (LoginFailException e) {
@@ -63,14 +64,14 @@ public class AccountController {
 
 		Member member = dao.findById(userId);
 		if (member == null) {
-			System.out.println("login fail");
+			System.out.println("Android Login Fail");
 			return "fail";
 		} else {
 			if (password.equals(member.getPassword())) {
-				System.out.println("login ok");
+				System.out.println("Android Login Ok");
 				return "ok";
 			} else {
-				System.out.println("login fail");
+				System.out.println("Android Login Fail");
 				return "fail";
 			}
 		}
@@ -78,6 +79,7 @@ public class AccountController {
 
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
+		System.out.println("Web Logout");
 		session.invalidate();
 		return "redirect:/";
 	}
@@ -92,6 +94,7 @@ public class AccountController {
 			return "account/join";
 		}
 		service.join(member);
+		System.out.println("Web Join Success");
 		return "redirect:/";
 //		return "account/join_success";
 	}
@@ -118,7 +121,7 @@ public class AccountController {
 				e.printStackTrace();
 				return "fail";
 			}
-			System.out.println("android join success");
+			System.out.println("Android Join Success : " + member.getUserId());
 			return "ok";
 		} else {
 			return "fail";
